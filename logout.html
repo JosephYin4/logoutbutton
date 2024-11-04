@@ -28,10 +28,30 @@
             background-color: #e60000; /* Darker red on hover */
         }
     </style>
+    <script>
+        function confirmLogout(event) {
+            if (!confirm("Are you sure you want to log out?")) {
+                event.preventDefault(); // Prevent form submission if the user cancels
+            }
+        }
+        
+        // Redirect to homepage after successful logout
+        function redirectToHomepage() {
+            window.location.href = "https://8000-josephyin4-homerentcare-0o9q8i2ky7l.ws-us116.gitpod.io/index.html"; // Adjust to your homepage URL
+        }
+
+        app.post('/logout', (req, res) => {
+    // Handle logout logic (e.g., destroy session, remove tokens, etc.)
+    
+    // Redirect to homepage
+    res.redirect('https://8000-josephyin4-homerentcare-0o9q8i2ky7l.ws-us116.gitpod.io/index.html');
+    });
+
+    </script>
 </head>
 <body>
 
-<form action="/logout" method="POST"> <!-- Adjust action as necessary -->
+<form action="/logout" method="POST" onsubmit="confirmLogout(event)" onsubmit="redirectToHomepage()">
     <button type="submit" class="logout-button">Logout</button>
 </form>
 
